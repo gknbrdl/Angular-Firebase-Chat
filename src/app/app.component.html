@@ -1,0 +1,48 @@
+<p-dialog header="Giriş" [(visible)]="display" modal="modal" width="300" [responsive]="true" [closeOnEscape]="false" [closable]="false">
+  <br>
+  <span class="ui-float-label">
+            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="name"> 
+            <label for="float-input">Nick Name</label>
+        </span>
+  <br>
+  <button type="button" pButton icon="fa-check" (click)="registerUser(name)" label="Başla"></button>
+</p-dialog>
+<div class="container-fluid">
+  <div class="wrapper">
+    <div *ngFor="let message of items | async; let index =index; let isOdd=odd; let isEven=even" class="col-md-6">
+      <div class="row" *ngIf="user.id === message.id">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6 alert alert-success px-3 py-1">
+          <div class="d-flex justify-content-between name relative">
+            <small [innerHtml]="message.userName | uppercase"></small>
+            <small [innerHtml]="message.id | date:'dd MMM yyyy'"></small>
+          </div>
+          <hr class="my-1">
+          <div>
+            <small [innerHtml]="message.message"></small>
+          </div>
+          <div [ngStyle]="{'background':message.color}" class="line"></div>
+        </div>
+      </div>
+      <div class="row" *ngIf="user.id !== message.id">
+        <div class="col-lg-6 alert alert-secondary px-3 py-1">
+          <div class="d-flex justify-content-between name">
+            <small [innerHtml]="message.userName | uppercase"></small>
+            <small [innerHtml]="message.id | date:'dd MMM yyyy'"></small>
+          </div>
+          <hr class="my-1">
+          <div>
+            <small [innerHtml]="message.message"></small>
+          </div>
+          <div [ngStyle]="{'background':message.color}" class="line"></div>
+        </div>
+        <div class="col-lg-6"></div>
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="pushData(newItem)">
+    <div class="form-group">
+      <textarea class="form-control" [(ngModel)]="newItem" name="adasd" rows="3" placeholder="..." (keyup.enter)="pushData(newItem)"></textarea>
+    </div>
+  </form>
+</div>
